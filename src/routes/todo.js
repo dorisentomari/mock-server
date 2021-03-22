@@ -9,17 +9,9 @@ route.post('/todo/create', async (req, res) => {
     return res.json(result);
 });
 
-route.post('/todo/:id/finish', async (req, res) => {
-    return changeTodoStatus(req, res, true);
-});
-
-route.post('/todo/:id/not-finish', async (req, res) => {
-    return changeTodoStatus(req, res, false);
-});
-
 route.post('/todo/:id/update', async (req, res) => {
-    const { content = '', title = '' } = req.body;
-    return changeTodoContent(req, res, { content, title });
+    const { content = '', title = '', status } = req.body;
+    return changeTodoContent(req, res, { content, title, status });
 });
 
 route.post('/todo/:id/delete', async (req, res) => {
@@ -42,13 +34,6 @@ route.get('/todo/:id/get', async (req, res) => {
     const todoItem = await TodoModel.findOne({_id: req.params.id});
     return res.json({data: todoItem});
 });
-
-
-async function changeTodoStatus(req, res, status, content = null) {
-    const id = req.params.id;
-    const result = await TodoModel.update({_id: id}, {status, content});
-    return res.json(result);
-}
 
 async function changeTodoContent(req, res, doc) {
     const id = req.params.id;
