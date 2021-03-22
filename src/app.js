@@ -1,3 +1,4 @@
+require('./helper/initEnv');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,7 +8,7 @@ const connectMongoDB = require('./mongodb');
 const initRoute = require('./routes');
 
 const app = express();
-const PORT = 18888;
+const PORT = process.env.port || 18888;
 
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
