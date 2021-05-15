@@ -35,7 +35,7 @@ app.listen(PORT, err => {
 	if (err) {
 		console.log(err);
 	} else {
-		console.log(`react-webpack-typescript-template test server is running at http://localhost:${PORT}`);
+		console.log(`mock server is running at http://localhost:${PORT}`);
 	}
 });
 
